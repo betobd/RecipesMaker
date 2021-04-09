@@ -1,4 +1,9 @@
+import Model.*
 
+val listaAgua = mutableMapOf(1 to "Fria", 2 to "Caliente")
+val listaAceites = mutableMapOf(1 to "Oliva",2 to "Girasol",3 to "Coco")
+val listaFrutas = mutableMapOf(1 to "Fresa",2 to "Plátano", 3 to "Uvas", 4 to "Manzana",5 to "Naranja",6 to "Pera",7 to "Cereza")
+val listaCereales = mutableMapOf(1 to "Avena",2 to "Trigo", 3 to "Arroz", 4 to "Maiz")
 var listaRecetas: MutableList<Receta> = mutableListOf()
 
 val ingredientesDisponibles = """
@@ -64,33 +69,31 @@ fun nuevaReceta(){
 
 fun verReceta() {
     println("Tiene ${listaRecetas.size} recetas guardadas:")
-    for (receta in listaRecetas){
-        println("${receta.verNombre()}")
-        println("Ingredientes:")
-        for (ingrediente in receta.verIngredientes()){
-            println("\t${ingrediente}")
-        }
+   // println(listaRecetas)
+    for ((pos, receta) in listaRecetas.withIndex()){
+        println("Receta #${pos +1 } - '${receta.verNombre()}' ")
+        println("   Ingredientes:")
+        receta.verIngredientes()
     }
 }
 
 fun agregarIngrediente(titulo :String){
-    val listaIngredientes: ArrayList<String>  = ArrayList()
+  //  val listaIngredientes: ArrayList<String>  = ArrayList()
+    val listaIngredientes: ArrayList<Ingrediente>  = ArrayList()
 
     do{
         println("Ingrese número de ingrediente (Presione 0 para salir): ")
         val ingredienteDeseado:String? = readLine()
-        //val listaIngredientes: ArrayList<String>  = ArrayList()
-
 
         when(ingredienteDeseado){
-            "1" -> listaIngredientes.add("Agua")
-            "2" -> listaIngredientes.add("Leche")
-            "3" -> listaIngredientes.add("Carne")
-            "4" -> listaIngredientes.add("Verduras")
-            "5" -> listaIngredientes.add("Frutas")
-            "6" -> listaIngredientes.add("Cereal")
-            "7" -> listaIngredientes.add("Huevos")
-            "8" -> listaIngredientes.add("Aceite")
+            "1" -> agua(listaIngredientes,titulo)
+            "2" -> leche(listaIngredientes,titulo)
+            "3" -> carne(listaIngredientes,titulo)
+            "4" -> verdura(listaIngredientes,titulo)
+            "5" -> fruta(listaIngredientes,titulo)
+            "6" -> cereal(listaIngredientes,titulo)
+            "7" -> huevos(listaIngredientes,titulo)
+            "8" -> aceite(listaIngredientes,titulo)
             else -> {
                 println("Ingrediente no existe")
 
@@ -102,6 +105,7 @@ fun agregarIngrediente(titulo :String){
         val nuevaReceta = Receta(titulo,listaIngredientes)
         listaRecetas.add(nuevaReceta)
         println("Su receta $titulo fue guardada")
+
         pantallaInicio()
 
 
@@ -110,4 +114,205 @@ fun agregarIngrediente(titulo :String){
 fun salir(){
 
     println("Programa finalizado")
+}
+
+fun agua(listaIngredientes: ArrayList<Ingrediente>, titulo: String){
+
+
+        println("Elija el tipo de agua que desea:")
+        for(ing in listaAgua){
+            println("${ing.key}  - ${ing.value}  ")
+        }
+        val aguaDeseada:String? = readLine()
+        println("Escriba la cantidad deseada en mililitros:")
+        val cantidadDeseada:Int? = readLine()?.toInt()
+        when(aguaDeseada){
+            "1" -> {
+                var agua :Agua =Agua("Agua Fria", cantidadDeseada)
+                listaIngredientes.add(agua)
+                println("Ingrediente: ${agua.nombre},  agregado a la receta '$titulo ' ")
+
+            }
+            "2" -> {
+                var agua :Agua =Agua("Agua Caliente", cantidadDeseada)
+                listaIngredientes.add(agua)
+                println("Ingrediente: ${agua.nombre},  agregado a la receta '$titulo ' ")
+
+            }
+        }
+
+    }
+
+fun fruta(listaIngredientes: ArrayList<Ingrediente>, titulo: String){
+
+    println("Elija el la fruta que desea:")
+    for(fru in listaFrutas){
+        println("${fru.key}  - ${fru.value}  ")
+    }
+    val frutaDeseada:String? = readLine()
+    println("Escriba la cantidad deseada en unidades:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+    when(frutaDeseada){
+        "1" -> {
+            var fruta :Fruta =Fruta("Fresas", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+        "2" -> {
+            var fruta :Fruta =Fruta("Platano", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "3" -> {
+            var fruta :Fruta =Fruta("Uvas", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "4" -> {
+            var fruta :Fruta =Fruta("Manzana", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "5" -> {
+            var fruta :Fruta =Fruta("Naranja", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "6" -> {
+            var fruta :Fruta =Fruta("Pera", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "7" -> {
+            var fruta :Fruta =Fruta("Cerezas", cantidadDeseada)
+            listaIngredientes.add(fruta)
+            println("Ingrediente: ${fruta.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+    }
+
+}
+
+fun aceite(listaIngredientes: ArrayList<Ingrediente>, titulo: String){
+
+    println("Elija el la fruta que desea:")
+    for(ace in listaAceites){
+        println("${ace.key}  - ${ace.value}  ")
+    }
+    val aceiteDeseado:String? = readLine()
+    println("Escriba la cantidad deseada en mililitros:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+    when(aceiteDeseado){
+        "1" -> {
+            var aceite : Aceite =Aceite("Oliva", cantidadDeseada)
+            listaIngredientes.add(aceite)
+            println("Ingrediente: ${aceite.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+        "2" -> {
+            var aceite :Aceite =Aceite("Girasol", cantidadDeseada)
+            listaIngredientes.add(aceite)
+            println("Ingrediente: ${aceite.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "3" -> {
+            var aceite :Aceite =Aceite("Coco", cantidadDeseada)
+            listaIngredientes.add(aceite)
+            println("Ingrediente: ${aceite.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+
+    }
+
+}
+
+fun cereal(listaIngredientes: ArrayList<Ingrediente>, titulo: String){
+    println("Elija el la fruta que desea:")
+
+    for(cer in listaCereales){
+        println("${cer.key}  - ${cer.value}  ")
+    }
+    val cerealDeseado:String? = readLine()
+    println("Escriba la cantidad deseada en gramos:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+    when(cerealDeseado){
+        "1" -> {
+            var cereal : Cereal = Cereal("Avena", cantidadDeseada)
+            listaIngredientes.add(cereal)
+            println("Ingrediente: ${cereal.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+        "2" -> {
+            var cereal : Cereal = Cereal("Trigo", cantidadDeseada)
+            listaIngredientes.add(cereal)
+            println("Ingrediente: ${cereal.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "3" -> {
+            var cereal : Cereal = Cereal("Arroz", cantidadDeseada)
+            listaIngredientes.add(cereal)
+            println("Ingrediente: ${cereal.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+        "4" -> {
+            var cereal :Cereal =Cereal("Maiz", cantidadDeseada)
+            listaIngredientes.add(cereal)
+            println("Ingrediente: ${cereal.nombre},  agregado a la receta '$titulo ' ")
+
+        }
+
+    }
+}
+
+fun leche(listaIngredientes: ArrayList<Ingrediente>, titulo: String) {
+    println("Escriba la cantidad deseada en mililitros:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+
+    var leche :Leche = Leche("Leche", cantidadDeseada)
+    listaIngredientes.add(leche)
+    println("Ingrediente: ${leche.nombre},  agregado a la receta '$titulo ' ")
+}
+
+fun huevos(listaIngredientes: ArrayList<Ingrediente>, titulo: String) {
+    println("Escriba la cantidad deseada en unidades:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+
+    var huevos :Huevos = Huevos("Huevos", cantidadDeseada)
+    listaIngredientes.add(huevos)
+    println("Ingrediente: ${huevos.nombre},  agregado a la receta '$titulo ' ")
+}
+
+fun carne(listaIngredientes: ArrayList<Ingrediente>, titulo: String) {
+    println("Escriba la cantidad deseada en gramos:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+
+    var carne :Carne = Carne("Leche", cantidadDeseada)
+    listaIngredientes.add(carne)
+    println("Ingrediente: ${carne.nombre},  agregado a la receta '$titulo ' ")
+}
+
+fun verdura(listaIngredientes: ArrayList<Ingrediente>, titulo: String) {
+
+    println("Escriba la cantidad deseada en gramos:")
+    val cantidadDeseada:Int? = readLine()?.toInt()
+
+    var verdura :Verdura =Verdura("Leche", cantidadDeseada)
+    listaIngredientes.add(verdura)
+    println("Ingrediente: ${verdura.nombre},  agregado a la receta '$titulo ' ")
+
 }
